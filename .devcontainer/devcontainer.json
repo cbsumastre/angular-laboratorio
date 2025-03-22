@@ -18,7 +18,9 @@
 				"johnpapa.Angular2",
 				"johnpapa.angular-essentials",
 				"eamodio.gitlens",
-				"ritwickdey.LiveServer"
+				"ritwickdey.LiveServer",
+				"aaron-bond.better-comments",
+				"wix.vscode-import-cost"
 			]
 		}
     },
