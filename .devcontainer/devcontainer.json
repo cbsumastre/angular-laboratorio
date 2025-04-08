@@ -20,7 +20,8 @@
 				"eamodio.gitlens",
 				"ritwickdey.LiveServer",
 				"aaron-bond.better-comments",
-				"wix.vscode-import-cost"
+				"wix.vscode-import-cost",
+				"angular.ng-template"
 			]
 		}
     },
