@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { Login } from '../model/login';
-import { login } from '../auth/mock/auth.mock.service';
+import { AuthData } from '../../model';
+import { AuthService } from '../../auth/mock/auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -13,7 +14,7 @@ import { login } from '../auth/mock/auth.mock.service';
     NgIf
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.scss'
 })
 
 
@@ -25,18 +26,18 @@ export class LoginComponent {
   errorMessage = ""
 
 
-  dataLogin: Login;
+  auth: AuthData;
 
-
-  constructor() {
-    this.dataLogin = {
+  constructor(private authService: AuthService,private router:Router) {
+    this.auth = {
       username: "",
       password: ""
     }
+    authService.removeAuth();
   }
 
-  onChangeField () {
-    this.errorMessage="";
+  onChangeField() {
+    this.errorMessage = "";
   }
 
   onSubmit(event: MouseEvent) {
@@ -45,9 +46,10 @@ export class LoginComponent {
     try {
       this.isLoading = true;
       this.errorMessage = "";
-      const loginOK = login(this.dataLogin)
+      const loginOK = this.authService.login(this.auth)
       if (loginOK) {
         this.errorMessage = "";
+        this.router.navigate(['/private/dashboard']);
       }
       else {
         this.errorMessage = "Username y/o password incorrectos";
