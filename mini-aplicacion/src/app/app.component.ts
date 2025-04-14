@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
 import { MenuPublicoComponent } from "./layout/menu-publico/menu-publico.component";
 import { MenuPrivadoComponent } from "./layout/menu-privado/menu-privado.component";
-import { AuthService } from './auth/mock/auth.service';
+import { AuthService } from './services/auth/mock/auth.service';
 
 @Component({
   selector: 'app-root',

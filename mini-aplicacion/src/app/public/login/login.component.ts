@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { AuthData } from '../../model';
-import { AuthService } from '../../auth/mock/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/mock/auth.service';
 
 
 
@@ -19,12 +19,8 @@ import { Router } from '@angular/router';
 
 
 export class LoginComponent {
-  @Input()
-  isLoading = false;
-
-  @Input()
-  errorMessage = ""
-
+  isLoading:boolean;
+  errorMessage:string;
 
   auth: AuthData;
 
@@ -33,6 +29,8 @@ export class LoginComponent {
       username: "",
       password: ""
     }
+    this.isLoading=false;
+    this.errorMessage="";
     authService.removeAuth();
   }
 
@@ -42,7 +40,6 @@ export class LoginComponent {
 
   onSubmit(event: MouseEvent) {
     event.preventDefault();
-
     try {
       this.isLoading = true;
       this.errorMessage = "";
@@ -64,6 +61,4 @@ export class LoginComponent {
       this.isLoading = false;
     }
   }
-
-
 }

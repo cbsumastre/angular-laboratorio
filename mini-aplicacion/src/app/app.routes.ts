@@ -4,7 +4,7 @@ import { LoginComponent } from './public/login/login.component';
 import { AboutComponent } from './public/about/about.component';
 import { DashboardComponent } from './private/dashboard/dashboard.component';
 import { GaleriaComponent } from './private/galeria/galeria.component';
-import { CrudComponent } from './private/crud/crud.component';
+import { CrudComponent } from './private/crud/user-list/user-list.component';
 import { ProfileComponent } from './private/profile/profile.component';
 
 export const routes: Routes = [
