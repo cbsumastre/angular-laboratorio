@@ -19,7 +19,7 @@ npx ng g c layout/menu-publico
 npx ng g c layout/menu-privado
 ```
 
-4. Generar los 3 componentes (publicos) y los 4 componentes (privados) que nos hacen falta
+4. Generar los componentes publicos y privados que nos hacen falta
 ```bash
 npx ng g c public/home
 npx ng g c public/login
@@ -27,11 +27,17 @@ npx ng g c public/about
 
 npx ng g c private/dashboard
 npx ng g c private/galeria
-npx ng g c private/crud
+npx ng g c private/crud/user-list
+npx ng g c private/crud/user-edit
 npx ng g c private/profile
 
 ```
 5. Generar un servicio de auth (mock)
 ```bash
-npx ng g service auth/mock/auth
+npx ng g service services/auth/mock/auth
+```
+
+6. Generar un servicio para crud
+```bash
+npx ng g service services/crud/users
 ```
