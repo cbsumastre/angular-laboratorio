@@ -3,12 +3,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth/mock/auth.service';
 
 @Component({
-  selector: 'app-menu-privado',
+  selector: 'app-private-menu',
   imports: [RouterLink, RouterLinkActive],
-  templateUrl: './menu-privado.component.html',
-  styleUrl: './menu-privado.component.scss'
+  templateUrl: './private-menu.component.html',
+  styleUrl: './private-menu.component.scss'
 })
-export class MenuPrivadoComponent {
+export class PrivateMenuComponent {
 
   @Input()
   username

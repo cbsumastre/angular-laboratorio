@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-menu-publico',
+  selector: 'app-public-menu',
   imports: [RouterLink, RouterLinkActive],
-  templateUrl: './menu-publico.component.html',
-  styleUrl: './menu-publico.component.scss'
+  templateUrl: './public-menu.component.html',
+  styleUrl: './public-menu.component.scss'
 })
-export class MenuPublicoComponent {
+export class PublicMenuComponent {
 
 }

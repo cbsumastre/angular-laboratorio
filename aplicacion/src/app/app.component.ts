@@ -1,19 +1,17 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
-import { MenuPublicoComponent } from "./layout/menu-publico/menu-publico.component";
-import { MenuPrivadoComponent } from "./layout/menu-privado/menu-privado.component";
 import { AuthService } from './services/auth/mock/auth.service';
+import { PublicMenuComponent } from './layout/public-menu/public-menu.component';
+import { PrivateMenuComponent } from './layout/private-menu/private-menu.component';
 
 @Component({
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    MenuPublicoComponent,
-    MenuPrivadoComponent,
+    PublicMenuComponent,
+    PrivateMenuComponent,
     CommonModule,
-    MenuPublicoComponent,
-    MenuPrivadoComponent,
     NgIf
 ],
   templateUrl: './app.component.html',

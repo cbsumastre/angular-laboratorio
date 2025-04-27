@@ -1,0 +1,11 @@
+<nav class="navbar-menu">
+  <img src="/favicon.ico">
+  <a routerLinkActive="active" routerLink="/private/dashboard" title="Go to Dashboard">Dashboard</a>
+  <a routerLinkActive="active" routerLink="/private/gallery" title="Go to Galería">Gallery</a>
+  <a routerLinkActive="active" routerLink="/private/crud" title="Go to CRUD">CRUD</a>
+  <a routerLinkActive="active" routerLink="/private/profile" title="Go to Profile">Profile</a>
+  <div>
+    <span>User: <span>{{username}}</span></span>
+    <a (click)="logout()" title="Logout">Logout</a>
+  </div>
+</nav>

@@ -3,9 +3,9 @@ import { HomeComponent } from './public/home/home.component';
 import { LoginComponent } from './public/login/login.component';
 import { AboutComponent } from './public/about/about.component';
 import { DashboardComponent } from './private/dashboard/dashboard.component';
-import { GaleriaComponent } from './private/galeria/galeria.component';
 import { CrudComponent } from './private/crud/user-list/user-list.component';
 import { ProfileComponent } from './private/profile/profile.component';
+import { GalleryComponent } from './private/gallery/gallery.component';
 
 export const routes: Routes = [
   {
@@ -33,8 +33,8 @@ export const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path: "galeria",
-        component: GaleriaComponent
+        path: "gallery",
+        component: GalleryComponent
       },
       {
         path: "crud",

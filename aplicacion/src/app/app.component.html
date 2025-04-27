@@ -1,7 +1,7 @@
 <div class="container-app">
 
-  <app-menu-publico *ngIf="!isAuthenticated()"></app-menu-publico>
-  <app-menu-privado *ngIf="isAuthenticated()"></app-menu-privado>
+  <app-public-menu *ngIf="!isAuthenticated()"></app-public-menu>
+  <app-private-menu *ngIf="isAuthenticated()"></app-private-menu>
 
   <div class="main-container">
     <router-outlet></router-outlet>

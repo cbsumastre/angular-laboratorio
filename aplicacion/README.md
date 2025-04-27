@@ -15,8 +15,8 @@ npm i @angular/cli
 
 3. Generar los 2 componentes de menu
 ```bash
-npx ng g c layout/menu-publico
-npx ng g c layout/menu-privado
+npx ng g c layout/public-menu
+npx ng g c layout/private-menu
 ```
 
 4. Generar los componentes publicos y privados que nos hacen falta
@@ -26,7 +26,7 @@ npx ng g c public/login
 npx ng g c public/about
 
 npx ng g c private/dashboard
-npx ng g c private/galeria
+npx ng g c private/gallery
 npx ng g c private/crud/user-list
 npx ng g c private/crud/user-edit
 npx ng g c private/profile
