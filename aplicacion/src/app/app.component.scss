@@ -10,23 +10,4 @@
     justify-content: center;
   }
 
-  footer {
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #e7e7e7;
-    padding: 10px 0;
-    text-align: center;
-    width: 100%;
-
-    a {
-      text-decoration: none;
-      padding: 10px 15px;
-      margin: 0 5px;
-      color: #777;
-      cursor: pointer;
-
-      &.active {
-        color: #0275d8;
-      }
-    }
-  }
 }

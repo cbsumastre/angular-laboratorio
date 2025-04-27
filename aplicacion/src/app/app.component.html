@@ -1,12 +1,7 @@
 <div class="container-app">
-
-  <app-public-menu *ngIf="!isAuthenticated()"></app-public-menu>
-  <app-private-menu *ngIf="isAuthenticated()"></app-private-menu>
-
+  <app-header />
   <div class="main-container">
     <router-outlet></router-outlet>
   </div>
-  <footer>
-    Master Front End XVII - Módulo 4.2 - Frameworks - Angular Laboratorio
-  </footer>
+  <app-footer />
 </div>

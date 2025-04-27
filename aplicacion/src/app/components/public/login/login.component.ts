@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { AuthData } from '../../model';
+import { AuthData } from '../../../model';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth/mock/auth.service';
+import { AuthService } from '../../../services/auth/mock/auth.service';
 
 
 

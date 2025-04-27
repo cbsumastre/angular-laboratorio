@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UsersService } from '../../../services/crud/users.service';
-import { User } from '../../../model';
+import { UsersService } from '../../../../services/crud/users.service';
+import { User } from '../../../../model';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserEditComponent } from '../user-edit/user-edit.component';

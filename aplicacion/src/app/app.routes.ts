@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './public/home/home.component';
-import { LoginComponent } from './public/login/login.component';
-import { AboutComponent } from './public/about/about.component';
-import { DashboardComponent } from './private/dashboard/dashboard.component';
-import { CrudComponent } from './private/crud/user-list/user-list.component';
-import { ProfileComponent } from './private/profile/profile.component';
-import { GalleryComponent } from './private/gallery/gallery.component';
+import { HomeComponent } from './components/public/home/home.component';
+import { LoginComponent } from './components/public/login/login.component';
+import { AboutComponent } from './components/public/about/about.component';
+import { DashboardComponent } from './components/private/dashboard/dashboard.component';
+import { CrudComponent } from './components/private/crud/user-list/user-list.component';
+import { ProfileComponent } from './components/private/profile/profile.component';
+import { GalleryComponent } from './components/private/gallery/gallery.component';
 
 export const routes: Routes = [
   {

@@ -4,8 +4,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-public-menu',
   imports: [RouterLink, RouterLinkActive],
-  templateUrl: './public-menu.component.html',
-  styleUrl: './public-menu.component.scss'
+  templateUrl: './menu.component.html',
+  styleUrl: './menu.component.scss'
 })
 export class PublicMenuComponent {
 

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from '../../../model';
-import { UsersService } from '../../../services/crud/users.service';
+import { User } from '../../../../model';
+import { UsersService } from '../../../../services/crud/users.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
