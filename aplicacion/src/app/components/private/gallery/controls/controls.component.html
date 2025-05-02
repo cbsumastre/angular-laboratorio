@@ -7,10 +7,10 @@
     (click)="imageService.onNextImage()">
     Next
   </button>
-  <button class="button">
+  <button class="button" (click)="onZoomIn()">
     Zoom In
   </button>
-  <button class="button">
+  <button class="button" (click)="onZoomOut()">
     Zoom Out
   </button>
   <button class="button" (click)="onPlay()" *ngIf="!isPlaying()">

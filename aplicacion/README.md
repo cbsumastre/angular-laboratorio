@@ -62,3 +62,9 @@ npx ng g c components/private/gallery/thumbnails
 npx ng g c components/private/gallery/controls
 npx ng g c components/private/gallery/image-selected
 ```
+
+10. Generar directiva para aumentar/disminuir la imagen y un servicio que lo controle
+```bash
+npx ng g d directives/imagen/zoom
+npx ng g s services/imagen/zoom
+```

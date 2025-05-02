@@ -4,7 +4,6 @@ import { interval, Subscription } from 'rxjs';
 
 import { ImagesService } from '../../../../services/gallery/images.service';
 
-
 @Component({
   selector: 'app-controls',
   imports: [CommonModule],
@@ -35,6 +34,14 @@ export class ControlsComponent implements OnDestroy {
         }
       }
     }
+
+  onZoomIn() {
+    window.dispatchEvent(new CustomEvent('zoomIn'));
+  }
+
+  onZoomOut() {
+    window.dispatchEvent(new CustomEvent('zoomOut'));
+  }
 
 
   ngOnDestroy(): void {
