@@ -68,3 +68,9 @@ npx ng g c components/private/gallery/image-selected
 npx ng g d directives/imagen/zoom
 npx ng g s services/imagen/zoom
 ```
+
+11. Generar directiva para rotar una imagen
+
+```bash
+npx ng g d directives/imagen/rotate
+```
