@@ -8,7 +8,26 @@ export class UsersService {
 
   private baseUrl = "https://jsonplaceholder.typicode.com/users"
 
+  private usersCache: User[] = [];
+
+  constructor() {
+    this.fetchUsers().then(users => {
+      this.usersCache = users;
+    }
+    )
+  }
+
   async getUsers() {
+    return new Promise<User[]>((resolve, reject) => {
+      resolve(this.usersCache)
+    })
+  }
+
+  getIndex(id: number) {
+    return this.usersCache.findIndex(user => user.id === id);
+  }
+
+  private async fetchUsers() {
     //simula un retardo
     return new Promise<User[]>((resolve, reject) => {
       setTimeout(async () => {
@@ -19,11 +38,13 @@ export class UsersService {
           if (response.ok) {
             const result = await response.json();
             users = [...result];
-            console.log(users)
+            // console.log(users)
+          } else {
+            throw new Error(response.statusText);
           }
         }
         catch (error) {
-          console.error(error);
+          throw new Error("Error fetching users")
         }
         resolve(users)
       }, 500);
@@ -31,40 +52,15 @@ export class UsersService {
   }
 
   async getUser(id: number) {
-    let user;
-    try {
-      const response = await fetch(`${this.baseUrl}/${id}`)
-      if (response.ok) {
-        const result = await response.json();
-        user = { ...result } as User
-      }
-    }
-    catch (error) {
-      console.error(error);
-    }
-    return user;
-  }
-
-  async postUser(user: User) {
-    try {
-      const response = await fetch(this.baseUrl, {
-        method: "POST",
-        body: JSON.stringify(user)
-      })
-      if (response.ok) {
-        const result = await response.json();
-        const newUser = { ...result } as User
-
-        return newUser;
+    return new Promise<User>((resolve, reject) => {
+      const user = this.usersCache.find(user => user.id === id);
+      if (user) {
+        resolve(user);
       }
       else {
-        throw new Error(response.statusText);
+        reject(new Error("User not found"));
       }
-    }
-    catch (error) {
-      console.error(error);
-    }
-    return undefined;
+    });
   }
 
   async updateUser(user: User) {
@@ -74,8 +70,13 @@ export class UsersService {
         body: JSON.stringify(user)
       })
       if (response.ok) {
-        const result = await response.json();
-        return { ...result } as User
+        const result = (await response.json());
+        const idx = this.getIndex(user.id);
+        if (idx !== -1) {
+          this.usersCache[idx] = { ...result };
+          return this.usersCache[idx];
+        }
+        return { ...result };
       }
       else {
         throw new Error(response.statusText);
@@ -93,6 +94,10 @@ export class UsersService {
         method: "DELETE",
       })
       if (response.ok) {
+        const idx = this.getIndex(id);
+        if (idx !== -1) {
+          this.usersCache.splice(idx, 1);
+        }
         return true;
       }
       else {
