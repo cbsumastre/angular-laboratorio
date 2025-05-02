@@ -1,0 +1,22 @@
+<div class="controls">
+  <button class="button" [ngClass]="imageService.isCurrentImageFirst() ? 'disabled' : ''"
+    (click)="imageService.onPreviousImage()">
+    Previous
+  </button>
+  <button class="button" [ngClass]="imageService.isCurrentImageLast() ? 'disabled' : ''"
+    (click)="imageService.onNextImage()">
+    Next
+  </button>
+  <button class="button">
+    Zoom In
+  </button>
+  <button class="button">
+    Zoom Out
+  </button>
+  <button class="button" (click)="onPlay()" *ngIf="!isPlaying()">
+    Play
+  </button>
+  <button class="button" (click)="onStop()" *ngIf="isPlaying()">
+    Stop
+  </button>
+</div>

@@ -55,3 +55,10 @@ npx ng g service services/crud/users
 ```bash
 npx ng g s services/gallery/images
 ```
+
+9. Generar componentes de la galeria
+```bash
+npx ng g c components/private/gallery/thumbnails
+npx ng g c components/private/gallery/controls
+npx ng g c components/private/gallery/image-selected
+```

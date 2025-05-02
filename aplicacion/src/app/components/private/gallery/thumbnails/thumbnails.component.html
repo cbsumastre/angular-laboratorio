@@ -1,0 +1,6 @@
+<div class="thumbnails">
+  <span *ngFor="let image of imageService.getImages(); trackBy: trackByItems">
+    <img class="thumbnail" [ngClass]="imageService.isSelectedImage(image) ? 'selected':''" [src]="image.src"
+      [alt]="image.title" [title]="image.title" (click)="imageService.setSelectedImage(image)" />
+  </span>
+</div>

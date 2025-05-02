@@ -1,35 +1,5 @@
 <div class="gallery">
-  <div class="thumbnails">
-    <span *ngFor="let image of getGalleryImages(); trackBy: trackByItems">
-      <img class="thumbnail" [ngClass]="isSelectedImage(image) ? 'selected':''" [src]="image.src" [alt]="image.title"
-        [title]="image.title" (click)="onSelectImage(image)" />
-    </span>
-  </div>
-
-  <div class="controls">
-    <button class="button" [ngClass]="isCurrentImageFirst() ? 'disabled' : ''" (click)="onPreviousImage()">
-      Previous
-    </button>
-    <button class="button" [ngClass]="isCurrentImageLast() ? 'disabled' : ''" (click)="onNextImage()">
-      Next
-    </button>
-    <button class="button">
-      Zoom In
-    </button>
-    <button class="button">
-      Zoom Out
-    </button>
-    <button class="button" (click)="onPlay()" *ngIf="!isPlaying()">
-      Play
-    </button>
-    <button class="button" (click)="onStop()" *ngIf="isPlaying()">
-      Stop
-    </button>
-  </div>
-
-  <h4>{{selectedImage().title}}</h4>
-  <div class="image-selected-container">
-    <img class="image-selected" [src]="selectedImage().src" [alt]="selectedImage().title" />
-  </div>
-
+  <app-thumbnails />
+  <app-controls />
+  <app-image-selected />
 </div>
