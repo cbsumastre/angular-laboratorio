@@ -7,7 +7,7 @@ import { UserEditComponent } from '../user-edit/user-edit.component';
 
 @Component({
   selector: 'app-crud',
-  imports: [NgIf, NgFor, FormsModule,UserEditComponent,ReactiveFormsModule],
+  imports: [NgIf, NgFor, FormsModule, UserEditComponent, ReactiveFormsModule],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
@@ -29,9 +29,9 @@ export class CrudComponent {
 
   edit(u: User) {
     // console.log(u);
-    this.user = u;
+    this.user = { ...u };
     this.isEditingUser = true;
-    console.log(this.isEditingUser,this.user);
+    console.log(this.isEditingUser, this.user);
   }
 
   delete(id: number) {

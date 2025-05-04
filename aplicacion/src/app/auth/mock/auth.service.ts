@@ -50,9 +50,9 @@ export class AuthService {
   private getAuth(): Store | undefined {
     const data = localStorage.getItem(this.KEY_LOCALSTORAGE)
     if (data) {
-      console.log("data", data);
+      // console.log("data", data);
       const auth = JSON.parse(data) as Store
-      console.log("auth", auth, auth && auth.isAuth);
+      // console.log("auth", auth, auth && auth.isAuth);
       return auth
     }
     return undefined;
@@ -66,7 +66,7 @@ export class AuthService {
     return auth.isAuth;
   }
 
-  getUsername():string {
+  getUsername(): string {
     const auth = this.getAuth();
     return auth?.username || ""
   }
