@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User as UserAPI } from '../../model/users/api-model';
-import { temporaryId, User as UserVM } from '../../model/users/view-model';
+import { UserAPI, UserVM, temporaryId } from "./../../model"
 import { mapUsersFromAPIToVM, mapUserVMToAPI } from '../../model/users/mapper';
 
 @Injectable({
