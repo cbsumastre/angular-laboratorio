@@ -1,7 +1,10 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appRotate]'
+  // con este selector la directiva se aplica a cualquier elemento
+  // selector: '[appRotate]'
+  // con este selector la directiva solo se aplica a imágenes
+  selector: 'img[appRotate]'
 })
 export class RotateDirective {
 

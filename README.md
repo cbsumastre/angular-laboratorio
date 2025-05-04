@@ -62,10 +62,10 @@ Los componentes todavía no tienen ningún contenido. No hay que programarlos. E
 
 5. Crea un formulario de login con 2 campos: username y password. Pon validaciones y mensajes de error. Al hacer submit del formulario, el componente invocará al método login() del servicio descrito en el siguiente punto. ✅
 
-6. Crea un servicio Auth que gestione el estado relacionado con la autenticación del usuario. Este servicio debe ofrecer cuatro métodos: 
+6. Crea un servicio Auth que gestione el estado relacionado con la autenticación del usuario. Este servicio debe ofrecer cuatro métodos:
 
 - login({username: string, password: string}): boolean ✅
- 
+
 - logout(): void ✅
 
 - isLogged(): boolean ✅
@@ -102,7 +102,7 @@ Este ejemplo modelo es similar pero no es exacto. Es para tener una idea. Lo que
 
 NOTA: Este ejercicio se puede programar en un componente del proyecto anterior o también se puede programar en un proyecto nuevo.
 
-1. Descarga al menos 8 fotos y ponlas en el directorio src/assets del proyecto. Dentro de src/assets puedes crear subdirectorios si así lo deseas  ✅
+1. Descarga al menos 8 fotos y ponlas en el directorio src/assets del proyecto. Dentro de src/assets puedes crear subdirectorios si así lo deseas ✅
 
 Desde el html puedes enlazar las imágenes de la siguiente forma:
 
@@ -112,23 +112,23 @@ Desde el html puedes enlazar las imágenes de la siguiente forma:
 
 2. Crea una lista (array) con objetos del tipo:
 
-{ id: number => id de la foto src: string => nombre o path de la imagen title => title de la imagen }  ✅
+{ id: number => id de la foto src: string => nombre o path de la imagen title => title de la imagen } ✅
 
 Puedes crear la lista en un archivo, en un servicio, en el propio componente…, pero sea como sea al final del todo esa lista tiene que llegar a una propiedad pública del componente Galería.
 
 3. La galería de fotos constará de 3 partes:
 
-- Imagen seleccionada: Una parte con la lista de todas las imágenes (en pequeño) de la galería.  ✅
+- Imagen seleccionada: Una parte con la lista de todas las imágenes (en pequeño) de la galería. ✅
 
-- Listado de imágenes: Una parte en la que se muestre en grande una de las fotos  ✅
+- Listado de imágenes: Una parte en la que se muestre en grande una de las fotos ✅
 
-- Botonera: Una parte con una botonera con 6 botones: anterior, siguiente, aumentar, disminuir, play, stop.  ✅
+- Botonera: Una parte con una botonera con 6 botones: anterior, siguiente, aumentar, disminuir, play, stop. ✅
 
 Crea la estructura HTML para mostrar esas 3 partes/bloques en la pantalla
 
 4, Programa la galería, las funcionalidades son las siguientes:
 
-- Al empezar, se mostrará una de las imágenes en la parte de Imagen seleccionada.  ✅
+- Al empezar, se mostrará una de las imágenes en la parte de Imagen seleccionada. ✅
 
 - Al hacer click en una imagen de la lista, la imagen correspondiente se mostrará en la parte de imagen seleccionada. ✅
 
@@ -174,7 +174,7 @@ la pipe slice haría return de los elementos 3, 4 y 5 del array images.
 
 Directiva: Rotate
 
-Crear una directiva para rotar imágenes.
+Crear una directiva para rotar imágenes. ✅
 
 En este ejercicio se practica:
 
@@ -193,18 +193,18 @@ Ejemplo modelo: [https://carherco.es/curso-angular/#/rotate](https://carherco.es
 El interfaz de uso de la directiva sería el siguiente:
 
 ```html
-<img rotate src="..."/>
-<img rotate="45" src="..."/>
-<img rotate="45" step="15" src="..."/>
+<img rotate src="..." />
+<img rotate="45" src="..." />
+<img rotate="45" step="15" src="..." />
 ```
 
 - Al hacer click en una imagen que tenga el atributo rotate, la imagen deberá rotar los grados indicados en el atributo step.
 
-- Por defecto rotará en pasos de 10 grados
+- Por defecto rotará en pasos de 10 grados ✅
 
-- Se le podrá indicar una rotación inicial en el propio atributo rotate
+- Se le podrá indicar una rotación inicial en el propio atributo rotate ✅
 
-- Si se hace click en la imagen con la tecla mayúsculas pulsada, la imagen rotará hacia el lado contrario.
+- Si se hace click en la imagen con la tecla mayúsculas pulsada, la imagen rotará hacia el lado contrario. ✅
 
 AYUDA: La propiedad transform de css permite establecer una rotación para un elemento del DOM. Ejemplo: Esta declaración css
 
@@ -218,9 +218,10 @@ mostraría los elementos img girados 20 grados.
 
 RETO: Prueba esta directiva en elementos que no sean imágenes (un h1, un div un p…), verás que también pueden ser rotados con esta directiva.
 
-- Modifica el selector de la directiva para que solamente afecte a elementos img.
+- Modifica el selector de la directiva para que solamente afecte a elementos img. ✅
 
 ## OPCIONAL: Uso de RxJs
+
 1. Modifica el método login() del servicio del primer ejercicio para que devuelva la respuesta de forma asíncrona en un observable.
 
 El servicio quedaría así:
@@ -244,13 +245,10 @@ AYUDA: Cambia el return true o return false por return of(true) o return of(fals
 AYUDA: Cambia el return of(true) y return of(false) por:
 
 ```ts import {delay} from ‘rxjs’;
-return of(true).pipe( delay(2000) );
-return of(false).pipe( delay(2000) );
+return of(true).pipe(delay(2000))
+return of(false).pipe(delay(2000))
 ```
 
 4. Pon un indicador (un gif de loading) en el formulario de login que se muestre al darle al botón de submit y desaparezca cuando el método de login haya emitido su respuesta.
 
 AYUDA: Como el observable emite un dato y acto seguido directamente la señal de completado/fin, puedes utilizar tanto la primera función del subscribe (la del next) como la tercera función del subscribe (la del completed) para esconder el gif.
-
-
-
