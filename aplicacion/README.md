@@ -83,3 +83,9 @@ npx ng g s services/imagen/zoom --skip-tests
 ```bash
 npx ng g d directives/imagen/rotate --skip-tests
 ```
+
+12. Generar un component de login que use RxJs
+
+```bash
+npx ng g c components/public/loginRxJs --skip-tests
+```

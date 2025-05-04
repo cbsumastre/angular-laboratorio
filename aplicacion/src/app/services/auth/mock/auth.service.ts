@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthData, Store } from '../../../model';
+import { delay, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,11 @@ export class AuthService {
     }
     return auth;
   }
+
+  loginObservable(data: AuthData): Observable<boolean> {
+    const auth = this.login(data);
+    return of(auth).pipe(delay(2000));
+  };
 
   logout() {
     console.log("Logout");

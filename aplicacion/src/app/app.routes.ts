@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/private/dashboard/dashboard.com
 import { CrudComponent } from './components/private/crud/user-list/user-list.component';
 import { ProfileComponent } from './components/private/profile/profile.component';
 import { GalleryComponent } from './components/private/gallery/gallery.component';
+import { LoginRxJsComponent } from './components/public/login-rx-js/login-rx-js.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,10 @@ export const routes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path: "loginRxJs",
+    component: LoginRxJsComponent
   },
   {
     path: "about",
