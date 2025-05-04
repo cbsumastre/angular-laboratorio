@@ -63,6 +63,28 @@ export class UsersService {
     });
   }
 
+  async postUser(user: User) {
+    try {
+      const response = await fetch(this.baseUrl, {
+        method: "POST",
+        body: JSON.stringify(user)
+      })
+      if (response.ok) {
+        const result = await response.json();
+        const newUser = { ...result } as User
+
+        return newUser;
+      }
+      else {
+        throw new Error(response.statusText);
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+    return undefined;
+  }
+
   async updateUser(user: User) {
     try {
       const response = await fetch(`${this.baseUrl}/${user.id}`, {
