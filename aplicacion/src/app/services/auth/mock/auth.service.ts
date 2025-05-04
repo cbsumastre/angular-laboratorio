@@ -64,7 +64,7 @@ export class AuthService {
     return auth.isAuth;
   }
 
-  getUsername():string {
+  getUsername(): string {
     const auth = this.getAuth();
     return auth?.username || ""
   }
