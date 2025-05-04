@@ -1,24 +1,30 @@
-<div class="status" id="status-message" *ngIf="isLoading">
-  Loading.....
+<div class="container">
+  <div class="status" id="status-message" *ngIf="isLoading">
+    Loading.....
+  </div>
+
+  <button class="btn btn-primary" (click)="newUser()">
+    Add New User
+  </button>
+
+  <ul class="user-list" id="user-list" *ngIf="!isLoading">
+    <li class="user-item" *ngFor="let user of users;trackBy: trackByItems">
+      <div class="user-info">
+        <div class="user-name">{{user.name}}</div>
+        <div class="user-email">{{user.email}}</div>
+      </div>
+      <div class="user-actions">
+        <button class="btn btn-primary" (click)="edit(user)">
+          Edit
+        </button>
+        <button class="btn btn-danger" (click)="delete(user.id)">
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+
+
+  <app-user-edit [user]="user" [isEditingUser]="isEditingUser" (saveEvent)="finishUserUpdate()"
+    (cancelEvent)="finishUserUpdate()" />
 </div>
-
-<ul class="user-list" id="user-list" *ngIf="!isLoading">
-  <li class="user-item" *ngFor="let user of users;trackBy: trackByItems">
-    <div class="user-info">
-      <div class="user-name">{{user.name}}</div>
-      <div class="user-email">{{user.email}}</div>
-    </div>
-    <div class="user-actions">
-      <button class="btn btn-primary" (click)="edit(user)">
-        Edit
-      </button>
-      <button class="btn btn-danger" (click)="delete(user.id)">
-        Delete
-      </button>
-    </div>
-  </li>
-</ul>
-
-
-<app-user-edit [user]="user" [isEditingUser]="isEditingUser" (saveEvent)="updateUser($event)"
-  (cancelEvent)="cancel()" />

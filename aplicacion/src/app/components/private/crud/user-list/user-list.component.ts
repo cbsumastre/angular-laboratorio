@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../../../../services/crud/users.service';
-import { User } from '../../../../model';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserEditComponent } from '../user-edit/user-edit.component';
+import { temporaryId, User } from '../../../../model/users/view-model';
 
 @Component({
   selector: 'app-crud',
@@ -34,6 +34,20 @@ export class CrudComponent {
     console.log(this.isEditingUser, this.user);
   }
 
+  newUser() {
+    this.user = {
+      id: temporaryId,
+      name: "",
+      email: "",
+      phone: "",
+      website: "",
+    }
+    this.isEditingUser = true;
+    console.log(this.isEditingUser, this.user);
+  }
+
+
+
   delete(id: number) {
     this.usersService.deleteUser(id).then(resp => {
       if (resp) {
@@ -46,12 +60,7 @@ export class CrudComponent {
     return item.id;
   }
 
-  updateUser(u: User) {
-    this.isEditingUser = false;
-    console.log("update user", u);
-  }
-
-  cancel() {
+  finishUserUpdate() {
     this.isEditingUser = false;
   }
 }

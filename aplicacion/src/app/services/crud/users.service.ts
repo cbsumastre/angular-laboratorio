@@ -1,5 +1,7 @@
-import { Injectable, resolveForwardRef } from '@angular/core';
-import { User } from '../../model';
+import { Injectable } from '@angular/core';
+import { User as UserAPI } from '../../model/users/api-model';
+import { temporaryId, User as UserVM } from '../../model/users/view-model';
+import { mapUsersFromAPIToVM, mapUserVMToAPI } from '../../model/users/mapper';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +10,16 @@ export class UsersService {
 
   private baseUrl = "https://jsonplaceholder.typicode.com/users"
 
-  private usersCache: User[] = [];
+  private usersCache: UserVM[] = [];
 
   constructor() {
     this.fetchUsers().then(users => {
-      this.usersCache = users;
-    }
-    )
+      this.usersCache = users
+    })
   }
 
   async getUsers() {
-    return new Promise<User[]>((resolve, reject) => {
+    return new Promise<UserVM[]>((resolve, reject) => {
       resolve(this.usersCache)
     })
   }
@@ -27,11 +28,11 @@ export class UsersService {
     return this.usersCache.findIndex(user => user.id === id);
   }
 
-  private async fetchUsers() {
+  private async fetchUsers(): Promise<UserVM[]> {
     //simula un retardo
-    return new Promise<User[]>((resolve, reject) => {
+    return new Promise<UserVM[]>((resolve, reject) => {
       setTimeout(async () => {
-        let users: User[] = [];
+        let users: UserAPI[] = [];
         try {
           const response = await fetch(this.baseUrl);
           console.log(response)
@@ -46,13 +47,13 @@ export class UsersService {
         catch (error) {
           throw new Error("Error fetching users")
         }
-        resolve(users)
+        resolve(mapUsersFromAPIToVM(users));
       }, 500);
     });
   }
 
-  async getUser(id: number) {
-    return new Promise<User>((resolve, reject) => {
+  async getUser(id: number): Promise<UserVM> {
+    return new Promise<UserVM>((resolve, reject) => {
       const user = this.usersCache.find(user => user.id === id);
       if (user) {
         resolve(user);
@@ -63,16 +64,16 @@ export class UsersService {
     });
   }
 
-  async postUser(user: User) {
+  async postUser(user: UserVM): Promise<UserVM | undefined> {
     try {
       const response = await fetch(this.baseUrl, {
         method: "POST",
-        body: JSON.stringify(user)
+        body: JSON.stringify(mapUserVMToAPI(user))
       })
       if (response.ok) {
-        const result = await response.json();
-        const newUser = { ...result } as User
-
+        const { id } = await response.json()
+        const newUser = { ...user, id }
+        this.usersCache.unshift(newUser);
         return newUser;
       }
       else {
@@ -85,20 +86,24 @@ export class UsersService {
     return undefined;
   }
 
-  async updateUser(user: User) {
+  async updateUser(user: UserVM): Promise<UserVM | undefined> {
+    if (user.id === temporaryId) {
+      return this.postUser(user);
+    }
+
     try {
       const response = await fetch(`${this.baseUrl}/${user.id}`, {
         method: "PUT",
-        body: JSON.stringify(user)
+        body: JSON.stringify(mapUserVMToAPI(user))
       })
       if (response.ok) {
-        const result = (await response.json());
-        const idx = this.getIndex(user.id);
+        const { id } = await response.json();
+        const idx = this.getIndex(id);
         if (idx !== -1) {
-          this.usersCache[idx] = { ...result };
+          this.usersCache[idx] = { ...user, id };
           return this.usersCache[idx];
         }
-        return { ...result };
+        return { ...user };
       }
       else {
         throw new Error(response.statusText);
@@ -110,16 +115,13 @@ export class UsersService {
     return undefined;
   }
 
-  async deleteUser(id: number) {
+  async deleteUser(id: number): Promise<boolean> {
     try {
       const response = await fetch(`${this.baseUrl}/${id}`, {
         method: "DELETE",
       })
       if (response.ok) {
-        const idx = this.getIndex(id);
-        if (idx !== -1) {
-          this.usersCache.splice(idx, 1);
-        }
+        this.usersCache = this.usersCache.filter(user => user.id !== id);
         return true;
       }
       else {

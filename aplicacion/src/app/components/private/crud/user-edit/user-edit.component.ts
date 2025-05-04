@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from '../../../../model';
 import { UsersService } from '../../../../services/crud/users.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../../../model/users/view-model';
 
 @Component({
   selector: 'app-user-edit',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './user-edit.component.html',
   styleUrl: './user-edit.component.scss'
 })
@@ -19,7 +19,7 @@ export class UserEditComponent {
   isEditingUser: boolean = false;
 
   @Output()
-  saveEvent: EventEmitter<User> = new EventEmitter<User>();
+  saveEvent: EventEmitter<void> = new EventEmitter<void>();
 
   @Output()
   cancelEvent: EventEmitter<void> = new EventEmitter<void>();
@@ -53,11 +53,10 @@ export class UserEditComponent {
 
   save(event: Event) {
     event.preventDefault();
-
     if (this.user) {
       this.usersService.updateUser(this.user).then(u => {
         console.log("new user", u);
-        this.saveEvent.emit(this.user);
+        this.saveEvent.emit();
       });
     }
   }
