@@ -11,6 +11,9 @@ export class UsersService {
 
   private usersCache: UserVM[] = [];
 
+  // ids de los usuarios creados por mi
+  private createdUserIds: number[] = [];
+
   constructor() {
     this.fetchUsers().then(users => {
       this.usersCache = users
@@ -64,30 +67,47 @@ export class UsersService {
   }
 
   async postUser(user: UserVM): Promise<UserVM | undefined> {
-    try {
-      const response = await fetch(this.baseUrl, {
-        method: "POST",
-        body: JSON.stringify(mapUserVMToAPI(user))
-      })
-      if (response.ok) {
-        const { id } = await response.json()
-        const newUser = { ...user, id }
-        this.usersCache.unshift(newUser);
-        return newUser;
+    return new Promise<UserVM | undefined>(async (resolve) => {
+      if (user.id === temporaryId) {
+        user.id = this.usersCache.length + 1;
+        this.usersCache.unshift(user);
+        this.createdUserIds.push(user.id);
       }
-      else {
-        throw new Error(response.statusText);
-      }
-    }
-    catch (error) {
-      console.error(error);
-    }
-    return undefined;
+      resolve(user);
+    });
+
+    // No llamo al API porque siempre devuelve el mismo id de usuario
+    // try {
+    //   const response = await fetch(this.baseUrl, {
+    //     method: "POST",
+    //     body: JSON.stringify(mapUserVMToAPI(user))
+    //   })
+    //   if (response.ok) {
+    //     const { id } = await response.json()
+    //     const newUser = { ...user, id }
+    //     this.usersCache.unshift(newUser);
+    //     return newUser;
+    //   }
+    //   else {
+    //     throw new Error(response.statusText);
+    //   }
+    // }
+    // catch (error) {
+    //   console.error(error);
+    // }
+    // return undefined;
   }
 
   async updateUser(user: UserVM): Promise<UserVM | undefined> {
     if (user.id === temporaryId) {
       return this.postUser(user);
+    }
+
+    // Si el usuario es de los creados por mi, no llamo al API
+    if (this.createdUserIds.includes(user.id)) {
+      const idx = this.getIndex(user.id);
+      this.usersCache[idx] = { ...user };
+      return { ...user };
     }
 
     try {
@@ -115,6 +135,12 @@ export class UsersService {
   }
 
   async deleteUser(id: number): Promise<boolean> {
+    // si el usuario es de los creados por mi, no llamo al API
+    if (this.createdUserIds.includes(id)) {
+      this.usersCache = this.usersCache.filter(user => user.id !== id);
+      this.createdUserIds = this.createdUserIds.filter(userId => userId !== id);
+      return true;
+    }
     try {
       const response = await fetch(`${this.baseUrl}/${id}`, {
         method: "DELETE",
