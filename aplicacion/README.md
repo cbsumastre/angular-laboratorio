@@ -1,3 +1,11 @@
+## Instrucciones
+
+| Instrucción     |                                                              |
+| :-------------- | :----------------------------------------------------------- |
+| `npm install`   | Instala las dependencias                                     |
+| `npm start`     | Inicia el servidor de desarrollo en `http://localhost:4200/` |
+| `npm run build` | Construye el proyecto en el directorio dist                  |
+
 ## Pasos realizados
 
 1. Inicializar entorno e instalar @angular/cli

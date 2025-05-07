@@ -4,6 +4,12 @@ Solamente el primer ejercicio es obligatorio.
 
 El resto de ejercicios son opcionales.
 
+## Instrucciones
+
+| Instrucción   |                  |
+| :------------ | :--------------- |
+| `npm install` | Instalar angular |
+
 Los puntos etiquetados como "reto" también son opcionales.
 
 ## OBLIGATORIO - Layout completo de mini-aplicación
