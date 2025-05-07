@@ -4,7 +4,6 @@ import { AuthService } from '../../../services/auth/mock/auth.service';
 import { Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-login-rx-js',

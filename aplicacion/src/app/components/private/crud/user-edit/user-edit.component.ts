@@ -1,16 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UsersService } from '../../../../services/crud/users.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { User } from '../../../../model/users/view-model';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { User, temporaryId } from '../../../../model/users/view-model';
 
 @Component({
   selector: 'app-user-edit',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './user-edit.component.html',
   styleUrl: './user-edit.component.scss'
 })
-export class UserEditComponent {
+export class UserEditComponent implements OnInit {
 
   @Input()
   user: User | undefined;
@@ -24,48 +24,101 @@ export class UserEditComponent {
   @Output()
   cancelEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private usersService: UsersService) { }
+  userForm: FormGroup;
 
-
-  changeName(event: Event) {
-    if (this.user) {
-      this.user.name = (event.target as HTMLInputElement).value
-    }
+  constructor(private usersService: UsersService, private fb: FormBuilder) {
+    this.userForm = this.fb.group({
+      name: ["", Validators.required],
+      email: ["", [Validators.required, Validators.email]],
+      phone: ["", Validators.minLength(9)],
+      website: ["", Validators.pattern(/^(http|https):\/\/[^ "]+$/)]
+    })
   }
 
-  changeEmail(event: Event) {
+  ngOnInit() {
     if (this.user) {
-      this.user.email = (event.target as HTMLInputElement).value
-    }
-  }
-
-  changePhone(event: Event) {
-    if (this.user) {
-      this.user.phone = (event.target as HTMLInputElement).value
-    }
-  }
-
-  changeWebsite(event: Event) {
-    if (this.user) {
-      this.user.website = (event.target as HTMLInputElement).value
-    }
-  }
-
-  save(event: Event) {
-    event.preventDefault();
-    if (this.user) {
-      this.usersService.updateUser(this.user).then(u => {
-        console.log("new user", u);
-        this.saveEvent.emit();
+      this.userForm.patchValue({
+        name: this.user.name,
+        email: this.user.email,
+        phone: this.user.phone,
+        website: this.user.website
       });
     }
   }
 
-  reset() {
-    this.user = undefined;
+
+
+  save(event: Event) {
+    event.preventDefault();
+    if (this.userForm.valid) {
+      const updatedUser: User = {
+        id: this.user ? this.user.id : temporaryId,
+        name: this.userForm.value.name,
+        email: this.userForm.value.email,
+        phone: this.userForm.value.phone,
+        website: this.userForm.value.website
+      };
+
+      this.usersService.updateUser(updatedUser).then(u => {
+        console.log("new user", u);
+        this.user = undefined;
+        this.saveEvent.emit();
+      });
+    } else {
+      console.error("Form is invalid", this.userForm.errors);
+    }
   }
 
+  reset() {
+    this.userForm.patchValue({
+      name: "",
+      email: "",
+      phone: "",
+      website: ""
+    });
+  }
+
+
+  // changeName(event: Event) {
+  //   if (this.user) {
+  //     this.user.name = (event.target as HTMLInputElement).value
+  //   }
+  // }
+
+  // changeEmail(event: Event) {
+  //   if (this.user) {
+  //     this.user.email = (event.target as HTMLInputElement).value
+  //   }
+  // }
+
+  // changePhone(event: Event) {
+  //   if (this.user) {
+  //     this.user.phone = (event.target as HTMLInputElement).value
+  //   }
+  // }
+
+  // changeWebsite(event: Event) {
+  //   if (this.user) {
+  //     this.user.website = (event.target as HTMLInputElement).value
+  //   }
+  // }
+
+  // save(event: Event) {
+  //   event.preventDefault();
+  //   if (this.user) {
+  //     this.usersService.updateUser(this.user).then(u => {
+  //       console.log("new user", u);
+  //       this.saveEvent.emit();
+  //     });
+  //   }
+  // }
+
+  // reset() {
+  //   this.user = undefined;
+  // }
+
   closeModal() {
+    this.user = undefined;
     this.cancelEvent.emit();
   }
 

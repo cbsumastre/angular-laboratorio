@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth/mock/auth.service';
 
 @Component({
@@ -7,14 +7,16 @@ import { AuthService } from '../../../services/auth/mock/auth.service';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
   @Input()
-  username
+  username: string | undefined
 
 
-  constructor(private authService:AuthService ){
-    this.username=authService!.getUsername();
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void {
+    this.username = this.authService!.getUsername();
   }
 
 }

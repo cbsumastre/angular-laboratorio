@@ -14,7 +14,7 @@ export class ThumbnailsComponent {
 
   imageService = inject(ImagesService);
 
-  trackByItems(index: number, item: GalleryImage) {
+  trackByItems(_index: number, item: GalleryImage) {
     return item.id;
   }
 

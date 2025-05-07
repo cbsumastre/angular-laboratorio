@@ -1,49 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { UsersService } from '../../../../services/crud/users.service';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserEditComponent } from '../user-edit/user-edit.component';
 import { temporaryId, User } from '../../../../model/users/view-model';
 
 @Component({
   selector: 'app-crud',
-  imports: [NgIf, NgFor, FormsModule, UserEditComponent, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, UserEditComponent, ReactiveFormsModule],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
-export class CrudComponent {
+export class CrudComponent implements OnInit {
 
-  users: User[] = [];
-  isLoading: boolean = false;
-  isEditingUser: boolean = false;
-  user: User | undefined;
+  users = signal<User[]>([]);
+  isLoading = signal(false);
+  isEditingUser = signal(false);
+  user = signal<User | undefined>(undefined);
 
 
-  constructor(private usersService: UsersService) {
-    this.isLoading = true;
-    usersService.getUsers().then(data => this.users = data).finally(() => {
-      this.isLoading = false;
+  constructor(private usersService: UsersService) { }
+
+  ngOnInit(): void {
+    console.log("ngOnInit")
+    this.isLoading.set(true);
+    this.usersService.getUsers().then(data => this.users.set(data)).finally(() => {
+      this.isLoading.set(false);
     })
   }
 
 
   edit(u: User) {
     // console.log(u);
-    this.user = { ...u };
-    this.isEditingUser = true;
-    console.log(this.isEditingUser, this.user);
+    this.user.set({ ...u });
+    this.isEditingUser.set(true);
+    console.log(this.isEditingUser(), this.user());
   }
 
   newUser() {
-    this.user = {
+    this.user.set({
       id: temporaryId,
       name: "",
       email: "",
       phone: "",
       website: "",
-    }
-    this.isEditingUser = true;
-    console.log(this.isEditingUser, this.user);
+    })
+    this.isEditingUser.set(true);
+    console.log(this.isEditingUser(), this.user());
   }
 
 
@@ -51,7 +54,7 @@ export class CrudComponent {
   delete(id: number) {
     this.usersService.deleteUser(id).then(resp => {
       if (resp) {
-        this.users = this.users.filter(user => user.id !== id)
+        this.users.update(currentValue => currentValue.filter(user => user.id !== id))
       }
     })
   }
@@ -61,6 +64,7 @@ export class CrudComponent {
   }
 
   finishUserUpdate() {
-    this.isEditingUser = false;
+    this.user.set(undefined)
+    this.isEditingUser.set(false);
   }
 }

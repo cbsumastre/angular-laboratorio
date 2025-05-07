@@ -2,6 +2,60 @@
 
   <div class="modal-content">
     <h2 id="form-title">Edit User</h2>
+    <form [formGroup]="userForm" (ngSubmit)="save($event)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" required formControlName="name">
+        <div *ngIf="userForm.get('name')?.invalid && (userForm.get('name')?.dirty || userForm.get('name')?.touched)"
+          class="error-message">
+          <span *ngIf="userForm.get('name')?.errors?.['required']">Name is required</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" required formControlName="email">
+        <div *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)"
+          class="error-message">
+          <span *ngIf="userForm.get('email')?.errors?.['required']">Email is required</span>
+          <span *ngIf="userForm.get('email')?.errors?.['email']">Invalid email format</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" required formControlName="phone">
+        <div *ngIf="userForm.get('phone')?.invalid && (userForm.get('phone')?.dirty || userForm.get('phone')?.touched)"
+          class="error-message">
+          <span *ngIf="userForm.get('phone')?.errors?.['minlength']">Phone number must be at least 9 characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="website">Website</label>
+        <input type="text" formControlName="website">
+        <div
+          *ngIf="userForm.get('website')?.invalid && (userForm.get('website')?.dirty || userForm.get('website')?.touched)"
+          class="error-message">
+          <span *ngIf="userForm.get('website')?.errors?.['pattern']">Invalid website format</span>
+        </div>
+      </div>
+
+      <div class="form-group buttons">
+        <button type="submit" class="btn btn-primary">
+          Save User
+        </button>
+        <button type="button" class="btn btn-primary-outline" id="reset-btn" (click)="reset()">Reset</button>
+        <button type="button" class="btn btn-primary-outline" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <div class="modal-overlay" *ngIf="isEditingUser">
+
+  <div class="modal-content">
+    <h2 id="form-title">Edit User</h2>
     <form id="user-form" (ngSubmit)="save($event)">
       <div class="form-group">
         <label for="name">Name</label>
@@ -32,4 +86,4 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->

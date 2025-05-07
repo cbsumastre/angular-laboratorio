@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { AuthData } from '../../../model';
@@ -19,18 +19,18 @@ import { AuthService } from '../../../services/auth/mock/auth.service';
 
 
 export class LoginComponent {
-  isLoading:boolean;
-  errorMessage:string;
+  isLoading: boolean;
+  errorMessage: string;
 
   auth: AuthData;
 
-  constructor(private authService: AuthService,private router:Router) {
+  constructor(private authService: AuthService, private router: Router) {
     this.auth = {
       username: "",
       password: ""
     }
-    this.isLoading=false;
-    this.errorMessage="";
+    this.isLoading = false;
+    this.errorMessage = "";
     authService.removeAuth();
   }
 

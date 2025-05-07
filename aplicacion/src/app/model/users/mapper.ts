@@ -12,7 +12,7 @@ export const mapUserFromAPIToVM = (user: UserApi): User => {
     name: user.name,
     email: user.email,
     phone: user.phone,
-    website: user.website
+    website: user.website && (!user.website.startsWith('http')) ? `https://${user.website}` : user.website
   }
 }
 

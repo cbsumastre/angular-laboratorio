@@ -5,4 +5,4 @@ source /home/vscode/.nvm/nvm.sh
 
 nvm install 22
 
- npm install -g npm@11.2.0
+ npm install -g npm@11.3.0
